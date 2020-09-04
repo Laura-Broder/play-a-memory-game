@@ -1,6 +1,6 @@
 const startBtn = document.querySelector(".startBtn");
 const welcomeContainer = document.querySelector(".welcome-container");
-
+localStorage["continue"] === "no";
 startBtn.addEventListener("click", function () {
   localStorage["chosenLevel"] = getGameLevel();
   localStorage["playerName"] = document.querySelector("#playerName").value;
@@ -23,6 +23,7 @@ if (localStorage["continue"] === "yes") {
   const lastPlayerName = localStorage["lastPlayerName"];
 
   addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors);
+  localStorage["continue"] === "no";
 }
 
 function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {

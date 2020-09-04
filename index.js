@@ -36,8 +36,7 @@ function startGame() {
   cardElementsArray = createCardElementsArray(state.numOfCards);
   playerName.innerText = `Player's name: ${state.playerName}`;
   numOfErrors.innerText = `Number of Errors: ${state.numOfError}`;
-  bestPlayer.innerText = `Best Player: 
-  ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
+  bestPlayer.innerText = `Best Player: ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
 }
 
 function state() {

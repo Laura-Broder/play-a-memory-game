@@ -10,11 +10,22 @@
   <body>
     <div class="container">
       <header>
-        <h1>Play A Memory Game</h1>
-        <button class="btn startBtn" type="button">New Game</button>
-        <h3 class="playerName"></h3>
-        <h3 class="numOfErrors"></h3>
-        <h2 class="bestPlayer">Best Player is *** with only ** Errors!</h2>
+        <div class="mainHeader">
+          <div class="headerBestPlayer">
+            <h1>Play A Memory Game</h1>
+            <h4 class="bestPlayer"></h4>
+          </div>
+          <div class="btns">
+            <button class="btn restartBtn" type="button">Restart Game</button>
+            <button class="btn startBtn" type="button">New Game</button>
+
+          </div>
+        </div>
+        
+        <div class="playerDetails">
+          <h2 class="playerName"></h2>
+          <h2 class="numOfErrors"></h2>
+        </div class="bestPlayer">
       </header>
       <div class="gameBoard-container">
         <div class="gameBoard"></div>
