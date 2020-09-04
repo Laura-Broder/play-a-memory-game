@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to my memory game!</title>
+    <link rel="stylesheet" href="./css/my-normalize.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="welcome-container">
+      <div class="inputFields-container">
+        <div class="inputName-container">
+          <label for="playerName">Please enter your name:</label>
+          <div class="inputName-Field">
+            <input type="text" name="playerName" id="playerName" />
+          </div>
+        </div>
+        <div class="inputLevel-container">
+          <label for="gameLevel">Choose the level of the game:</label>
+          <div class="inputLevel-radio">
+            <input type="radio" name="gameLevel" value="easy" />
+            <label for="level1">Easy</label>
+            <input type="radio" name="gameLevel" value="medium" />
+            <label for="level2">Medium</label>
+            <input type="radio" name="gameLevel" value="hard" />
+            <label for="level3">Hard</label>
+          </div>
+        </div>
+      </div>
+      <button class="btn startBtn">Start Game</button>
+    </div>
+    <script src="./welcome.js"></script>
+  </body>
+</html>
