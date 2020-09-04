@@ -1,3 +1,7 @@
+:root {
+  /* --img1 =  */
+}
+
 body {
   height: 100vh;
   padding: 2vw;
@@ -5,8 +9,10 @@ body {
 }
 .container {
   background: #f3f3f3;
-  /* max-height: 100%; */
+  height: 100%;
   padding: 2vw;
+  display: grid;
+  grid-template-rows: max-content auto;
 }
 header {
   display: flex;
@@ -17,23 +23,77 @@ h1 {
   /* padding: 0; */
 }
 .gameBoard-container {
-  /* max-height: 100%; */
-  padding: 2vw;
+  align-self: stretch;
+  height: 100%;
+  padding: 4vw;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .card {
-  height: 20vh;
-  width: 15vh;
-  background: blue;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  font-size: 40px;
+  color: #f3f3f3;
+  background-image: url(./animal-theme/back-cover.jpg);
+  background-repeat: no-repeat;
+  background-attachment: center;
+  background-position: center;
+  background-size: cover;
 }
 .gameBoard {
-  /* max-height: 100%; */
+  height: 100%;
   justify-items: center;
+  justify-content: space-between;
   display: grid;
-  grid-template-rows: repeat(3, auto);
-  grid-template-columns: repeat(4, auto);
   row-gap: 2vh;
+  column-gap: 1vw;
 }
-[data-flipped="true"] {
-  background: red;
+
+.gameBoard.easy {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 15vw);
+}
+.gameBoard.medium {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 10vw);
+}
+.gameBoard.hard {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(8, 8vw);
+}
+[data-value="1"][data-flipped="true"] {
+  background-image: url(./animal-theme/ashwini-chaudhary-dxZfz8VHA4Q-unsplash.jpg);
+}
+[data-value="2"][data-flipped="true"] {
+  background-image: url(./animal-theme/birger-strahl-JqUUYJ8oUmo-unsplash.jpg);
+}
+[data-value="3"][data-flipped="true"] {
+  background-image: url(./animal-theme/brittney-weng-YXq9lDyszBQ-unsplash.jpg);
+}
+[data-value="4"][data-flipped="true"] {
+  background-image: url(./animal-theme/dusan-smetana-lwaaikBkiP8-unsplash.jpg);
+}
+[data-value="5"][data-flipped="true"] {
+  background-image: url(./animal-theme/dustin-humes-qMuOXvGGIX8-unsplash.jpg);
+}
+[data-value="6"][data-flipped="true"] {
+  background-image: url(./animal-theme/erda-estremera-CsLRfajosgA-unsplash.jpg);
+}
+[data-value="7"][data-flipped="true"] {
+  background-image: url(./animal-theme/fabian-keller-2Bust437YkE-unsplash.jpg);
+}
+[data-value="8"][data-flipped="true"] {
+  background-image: url(./animal-theme/julia-craice-o0S-0Pa4F2M-unsplash.jpg);
+}
+[data-value="9"][data-flipped="true"] {
+  background-image: url(./animal-theme/karsten-winegeart-88lDyjdIDGw-unsplash.jpg);
+}
+[data-value="10"][data-flipped="true"] {
+  background-image: url(./animal-theme/leon-bublitz-HetKVEbe9lM-unsplash.jpg);
+}
+[data-value="11"][data-flipped="true"] {
+  background-image: url(./animal-theme/wolfgang-hasselmann-s-vNm9H3mRg-unsplash.jpg);
+}
+[data-value="12"][data-flipped="true"] {
+  background-image: url(./animal-theme/66-north-PqDR1-8jv1c-unsplash.jpg);
 }
