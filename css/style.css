@@ -90,7 +90,7 @@ header > div {
   justify-content: space-between;
   display: grid;
   row-gap: 2vh;
-  column-gap: 1vw;
+  column-gap: 2vw;
 }
 
 .gameBoard.easy {
@@ -98,8 +98,8 @@ header > div {
   grid-template-columns: repeat(4, 1fr);
 }
 .gameBoard.medium {
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
 }
 .gameBoard.hard {
   grid-template-rows: repeat(4, 1fr);
