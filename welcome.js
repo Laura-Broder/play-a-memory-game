@@ -1,5 +1,6 @@
 const startBtn = document.querySelector(".startBtn");
 const welcomeContainer = document.querySelector(".welcome-container");
+const welcomeMsgContainer = document.querySelector(".welcomeMsgContainer");
 // localStorage["continue"] === "no";
 
 function getGameLevel() {
@@ -15,8 +16,6 @@ function getGameLevel() {
 }
 
 function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {
-  const MsgToPrevPlayerContainer = document.createElement("div");
-  MsgToPrevPlayerContainer.classList.add("MsgToPrevPlayerContainer");
   const playerName = document.createElement("h2");
   const playerNumOfErrors = document.createElement("h2");
   const playAgain = document.createElement("h2");
@@ -24,16 +23,14 @@ function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {
   playerName.textContent = `GREAT JOB ${lastPlayerName}!!!`;
   playerNumOfErrors.textContent = `You won the game with only ${lastPlayerNumOfErrors} errors!`;
   playAgain.textContent = `Do you want to play again???`;
-  welcomeContainer.insertAdjacentElement(
-    "afterbegin",
-    MsgToPrevPlayerContainer,
-  );
-  MsgToPrevPlayerContainer.insertAdjacentElement("afterbegin", playAgain);
-  MsgToPrevPlayerContainer.insertAdjacentElement(
-    "afterbegin",
-    playerNumOfErrors,
-  );
-  MsgToPrevPlayerContainer.insertAdjacentElement("afterbegin", playerName);
+  welcomeMsgContainer.insertAdjacentElement("afterbegin", playAgain);
+  welcomeMsgContainer.insertAdjacentElement("afterbegin", playerNumOfErrors);
+  welcomeMsgContainer.insertAdjacentElement("afterbegin", playerName);
+}
+function addWelcomeMsg() {
+  const welcomeMsg = document.createElement("h2");
+  welcomeMsg.textContent = "WELCOME TO MY MEMORY GAME!";
+  welcomeMsgContainer.insertAdjacentElement("afterbegin", welcomeMsg);
 }
 
 startBtn.addEventListener("click", function () {
@@ -48,4 +45,6 @@ if (localStorage["continue"] === "yes") {
 
   addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors);
   localStorage["continue"] = "no";
+} else {
+  addWelcomeMsg();
 }

@@ -66,14 +66,13 @@ function resetTimer() {
   hr = 0;
   currentTimerValue.textContent = "0:00:00";
 }
-function startGame() {
+function resetBoard() {
   resetTimer();
   cardElementsArray = [];
   cardObjArray = [];
   gameBoard.innerHTML = "";
-  state();
-  cardObjArray = createCardObjArray(state.numOfCards);
-  cardElementsArray = createCardElementsArray(state.numOfCards);
+}
+function displayPlayerDetails() {
   playerName.innerText = `Player: ${state.playerName}`;
   numOfErrors.innerText = `#Errors: ${state.numOfError}`;
   if (localStorage["bestPlayerName"]) {
@@ -84,6 +83,13 @@ function startGame() {
     bestPlayer.innerText = `No wins on this level. 
     Be the first!`;
   }
+}
+function startGame() {
+  resetBoard();
+  state();
+  cardObjArray = createCardObjArray(state.numOfCards);
+  cardElementsArray = createCardElementsArray(state.numOfCards);
+  displayPlayerDetails();
   startTimer();
 }
 function state() {
@@ -92,7 +98,6 @@ function state() {
   state.numOfCards = getNumOfCards(state.gameLevel);
   state.cardsValuesArray = randomizeCardsArray(state.numOfCards);
   state.theme = animalTheme;
-  state.gameStarted = true;
   state.numOfError = 0;
   state.flippedCards = [];
   state.bestPlayer = {
@@ -101,18 +106,6 @@ function state() {
   };
 }
 
-// get players name
-function getGameLevel() {
-  const radioBtns = document.querySelectorAll('input[name="gameLevel"]');
-  let chosenLevel;
-  for (const rb of radioBtns) {
-    if (rb.checked) {
-      chosenLevel = rb.value;
-      break;
-    }
-  }
-  return chosenLevel;
-}
 function getNumOfCards(gameLevel) {
   let numOfCards;
   switch (gameLevel) {
@@ -139,21 +132,21 @@ function getNumOfCards(gameLevel) {
 // randomize the array values to randomize the cards.
 function randomizeCardsArray(arraySize) {
   let cardsArray = [];
+  // make an array of random numbers from 1 to num of cards needed
   while (cardsArray.length < arraySize) {
     let randomNum = Math.floor(Math.random() * arraySize);
     if (!cardsArray.includes(randomNum + 1)) {
       cardsArray.push(randomNum + 1);
     }
   }
+  // reduce number of different values by half
   for (let i = 0; i < cardsArray.length; i++) {
     if (cardsArray[i] > arraySize / 2)
       cardsArray[i] = cardsArray[i] - arraySize / 2;
   }
-  console.log(cardsArray);
   return cardsArray;
 }
-
-// functions on the card:
+// create array of objects that represent the cards
 function createCardObjArray(numOfCards) {
   let cardObjArray = [];
   for (let i = 0; i < numOfCards; i++) {
@@ -166,12 +159,9 @@ function createCardObjArray(numOfCards) {
     };
     cardObjArray.push(card);
   }
-  console.log(cardObjArray);
   return cardObjArray;
 }
-function updateCardObj(index, prop, newValue) {
-  cardObjArray[index][prop] = newValue;
-}
+// create an array of elements and display them on page
 function createCardElementsArray(numOfCards) {
   let cardElementsArray = [];
   for (let i = 0; i < numOfCards; i++) {
@@ -188,12 +178,22 @@ function createCardElementsArray(numOfCards) {
   }
   return cardElementsArray;
 }
+// functions on the card:
+// update card object:
+function updateCardObj(index, prop, newValue) {
+  cardObjArray[index][prop] = newValue;
+}
+function deactivateFlippedCard(clickedCard) {
+  clickedCard.setAttribute("data-active", false);
+  clickedCard.removeEventListener("click", handleCardClick);
+}
+
 function handleCardClick(event) {
   const clickedCard = event.currentTarget;
   flipCard(clickedCard);
   // updateCardObj(index, prop, newValue);
+  deactivateFlippedCard(clickedCard);
   clickedCard.setAttribute("data-active", false);
-  // clickedCard.style.transform = " rotateY(180deg)";
   clickedCard.removeEventListener("click", handleCardClick);
   state.flippedCards.push(clickedCard);
   if (state.flippedCards.length === 2) {
@@ -219,7 +219,7 @@ function winRestart() {
   localStorage["lastPlayerName"] = state.playerName;
   localStorage["continue"] = "yes";
   if (
-    Number(localStorage["bestPlayerNumOfErrors"]) < Number(state.numOfError) ||
+    Number(localStorage["bestPlayerNumOfErrors"]) > Number(state.numOfError) ||
     !localStorage["bestPlayerName"]
   ) {
     localStorage["bestPlayerName"] = state.playerName;

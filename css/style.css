@@ -97,7 +97,7 @@ header > div {
 
 .gameBoard.easy {
   grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(4, 15vw);
+  grid-template-columns: repeat(4, 18vw);
 }
 .gameBoard.medium {
   grid-template-rows: repeat(3, 1fr);
@@ -165,16 +165,17 @@ header > div {
   align-items: center;
   justify-content: center;
 }
-.MsgToPrevPlayerContainer {
+.welcomeMsgContainer {
   background-color: #f3f3f3;
   border-radius: 10px;
-  height: 30vw;
+  max-height: 30vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 10px 5px 5px rgb(19, 16, 16);
   padding: 30px 30px;
   margin: 20px 0;
+  line-height: 6vw;
 }
 .inputFields-container {
   background-color: #f3f3f3;
