@@ -8,7 +8,7 @@ body {
   font-family: "Kufam", cursive;
 }
 .btn {
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   padding: 10px 20px;
   margin: 10px;
   border: none;
@@ -59,6 +59,7 @@ header > div {
   background-color: rgb(207, 218, 214);
   border-radius: 5px;
   align-items: center;
+  font-size: 1.5vw;
 }
 .bestPlayer {
   text-align: left;
@@ -75,7 +76,6 @@ header > div {
   width: 100%;
   border-radius: 10px;
   box-shadow: 10px 5px 5px rgb(165, 158, 158);
-
   font-size: 40px;
   color: #f3f3f3;
   background-image: url(./animal-theme/back-cover.jpg);
@@ -83,6 +83,8 @@ header > div {
   background-attachment: center;
   background-position: center;
   background-size: cover;
+  /* transition: all 0.8s;
+  transform-style: preserve-3d; */
 }
 .gameBoard {
   height: 100%;
@@ -105,6 +107,13 @@ header > div {
   grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(8, 8vw);
 }
+/* [data-flipped="true"] {
+  transform: rotateY(180deg); */
+/* } */
+/* [data-flipped="false"] {
+  transform: rotateY(180deg); */
+/* } */
+
 [data-value="1"][data-flipped="true"] {
   background-image: url(./animal-theme/ashwini-chaudhary-dxZfz8VHA4Q-unsplash.jpg);
 }
@@ -149,17 +158,28 @@ header > div {
   background-attachment: center;
   background-position: center;
   background-size: cover;
-  font-size: 40px;
+  font-size: 2vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+.MsgToPrevPlayerContainer {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  height: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 10px 5px 5px rgb(19, 16, 16);
+  padding: 30px 30px;
+  margin: 20px 0;
 }
 .inputFields-container {
   background-color: #f3f3f3;
   border-radius: 10px;
-  height: 50vh;
+  min-height: 20vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -172,7 +192,7 @@ header > div {
 }
 
 .welcome-container > .startBtn {
-  font-size: 40px;
+  font-size: 3vw;
   padding: 30px 50px;
   color: black;
   border: none;
@@ -197,8 +217,8 @@ header > div {
 }
 .inputLevel-radio > div > input {
   vertical-align: middle;
-  transform: scale(1.5);
-  margin-right: 10px;
+  /* transform: scale(1.5); */
+  margin: 0 10px;
 }
 input#playerName {
   padding: 5px 10px;

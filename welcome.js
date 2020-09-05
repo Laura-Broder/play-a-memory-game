@@ -15,6 +15,8 @@ function getGameLevel() {
 }
 
 function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {
+  const MsgToPrevPlayerContainer = document.createElement("div");
+  MsgToPrevPlayerContainer.classList.add("MsgToPrevPlayerContainer");
   const playerName = document.createElement("h2");
   const playerNumOfErrors = document.createElement("h2");
   const playAgain = document.createElement("h2");
@@ -22,9 +24,16 @@ function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {
   playerName.textContent = `GREAT JOB ${lastPlayerName}!!!`;
   playerNumOfErrors.textContent = `You won the game with only ${lastPlayerNumOfErrors} errors!`;
   playAgain.textContent = `Do you want to play again???`;
-  welcomeContainer.insertAdjacentElement("afterbegin", playAgain);
-  welcomeContainer.insertAdjacentElement("afterbegin", playerNumOfErrors);
-  welcomeContainer.insertAdjacentElement("afterbegin", playerName);
+  welcomeContainer.insertAdjacentElement(
+    "afterbegin",
+    MsgToPrevPlayerContainer,
+  );
+  MsgToPrevPlayerContainer.insertAdjacentElement("afterbegin", playAgain);
+  MsgToPrevPlayerContainer.insertAdjacentElement(
+    "afterbegin",
+    playerNumOfErrors,
+  );
+  MsgToPrevPlayerContainer.insertAdjacentElement("afterbegin", playerName);
 }
 
 startBtn.addEventListener("click", function () {

@@ -37,6 +37,7 @@ restartGameBtn.addEventListener("click", () => {
   localStorage["continue"] === "no";
   location.href = "./welcome.html";
 });
+
 // start the game as the page loads
 startGame();
 
@@ -58,7 +59,6 @@ function updateSec() {
 
   currentTimerValue.textContent = `${hr}:${strMin}:${strSec}`;
 }
-
 function resetTimer() {
   secCounter = 0;
   sec = 0;
@@ -66,7 +66,6 @@ function resetTimer() {
   hr = 0;
   currentTimerValue.textContent = "0:00:00";
 }
-
 function startGame() {
   resetTimer();
   cardElementsArray = [];
@@ -75,18 +74,18 @@ function startGame() {
   state();
   cardObjArray = createCardObjArray(state.numOfCards);
   cardElementsArray = createCardElementsArray(state.numOfCards);
-  playerName.innerText = `Player's name: ${state.playerName}`;
-  numOfErrors.innerText = `Number of Errors: ${state.numOfError}`;
+  playerName.innerText = `Player: ${state.playerName}`;
+  numOfErrors.innerText = `#Errors: ${state.numOfError}`;
   if (localStorage["bestPlayerName"]) {
     bestPlayer.innerText = `Best Player:
-     ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
+     ${state.bestPlayer.bestPlayerName}
+     ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
   } else {
     bestPlayer.innerText = `No wins on this level. 
     Be the first!`;
   }
   startTimer();
 }
-
 function state() {
   state.playerName = localStorage["playerName"];
   state.gameLevel = localStorage["chosenLevel"];
@@ -101,6 +100,7 @@ function state() {
     bestPlayerNumOfErrors: localStorage["bestPlayerNumOfErrors"],
   };
 }
+
 // get players name
 function getGameLevel() {
   const radioBtns = document.querySelectorAll('input[name="gameLevel"]');
@@ -113,7 +113,6 @@ function getGameLevel() {
   }
   return chosenLevel;
 }
-
 function getNumOfCards(gameLevel) {
   let numOfCards;
   switch (gameLevel) {
@@ -155,7 +154,6 @@ function randomizeCardsArray(arraySize) {
 }
 
 // functions on the card:
-
 function createCardObjArray(numOfCards) {
   let cardObjArray = [];
   for (let i = 0; i < numOfCards; i++) {
@@ -195,6 +193,7 @@ function handleCardClick(event) {
   flipCard(clickedCard);
   // updateCardObj(index, prop, newValue);
   clickedCard.setAttribute("data-active", false);
+  // clickedCard.style.transform = " rotateY(180deg)";
   clickedCard.removeEventListener("click", handleCardClick);
   state.flippedCards.push(clickedCard);
   if (state.flippedCards.length === 2) {
@@ -237,7 +236,6 @@ function wrongGuess(card1Index, card2Index) {
   activateWrongMatch(card1Index, card2Index);
   setTimeout(activateCards, 1000);
 }
-
 function activateCards() {
   cardElementsArray.forEach((cardElement) => {
     if (cardElement.getAttribute("data-active") === "true") {
@@ -258,8 +256,10 @@ function checkMatch(card1Index, card2Index) {
     state.cardsValuesArray[card1Index] === state.cardsValuesArray[card2Index]
   );
 }
-
 function activateWrongMatch(card1Index, card2Index) {
   cardElementsArray[card1Index].setAttribute("data-active", true);
+
   cardElementsArray[card2Index].setAttribute("data-active", true);
+  // cardElementsArray[card1Index].style.transform = "none";
+  // cardElementsArray[card2Index].style.transform = "none";
 }
