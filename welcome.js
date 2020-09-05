@@ -1,11 +1,6 @@
 const startBtn = document.querySelector(".startBtn");
 const welcomeContainer = document.querySelector(".welcome-container");
-localStorage["continue"] === "no";
-startBtn.addEventListener("click", function () {
-  localStorage["chosenLevel"] = getGameLevel();
-  localStorage["playerName"] = document.querySelector("#playerName").value;
-  location.href = "./index.html";
-});
+// localStorage["continue"] === "no";
 
 function getGameLevel() {
   const radioBtns = document.querySelectorAll('input[name="gameLevel"]');
@@ -17,13 +12,6 @@ function getGameLevel() {
     }
   }
   return chosenLevel;
-}
-if (localStorage["continue"] === "yes") {
-  const lastPlayerNumOfErrors = localStorage["lastPlayerNumOfErrors"];
-  const lastPlayerName = localStorage["lastPlayerName"];
-
-  addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors);
-  localStorage["continue"] === "no";
 }
 
 function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {
@@ -37,4 +25,18 @@ function addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors) {
   welcomeContainer.insertAdjacentElement("afterbegin", playAgain);
   welcomeContainer.insertAdjacentElement("afterbegin", playerNumOfErrors);
   welcomeContainer.insertAdjacentElement("afterbegin", playerName);
+}
+
+startBtn.addEventListener("click", function () {
+  localStorage["chosenLevel"] = getGameLevel();
+  localStorage["playerName"] = document.querySelector("#playerName").value;
+  location.href = "./index.html";
+});
+
+if (localStorage["continue"] === "yes") {
+  const lastPlayerNumOfErrors = localStorage["lastPlayerNumOfErrors"];
+  const lastPlayerName = localStorage["lastPlayerName"];
+
+  addMsgToPrevPlayer(lastPlayerName, lastPlayerNumOfErrors);
+  localStorage["continue"] = "no";
 }

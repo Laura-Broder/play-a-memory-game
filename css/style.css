@@ -45,27 +45,25 @@ header > div {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  padding-bottom: 0;
+  align-items: center;
+  padding: 20px;
 }
 .mainHeader {
-  align-items: flex-end;
-  padding-bottom: 10px;
+  background: #fff;
+}
+.mainHeader h1 {
+  font-size: 3vw;
 }
 .playerDetails {
-  padding: 10px;
+  /* padding: 10px; */
   background-color: rgb(207, 218, 214);
   border-radius: 5px;
+  align-items: center;
 }
 .bestPlayer {
-  /* padding: 20px; */
+  text-align: center;
 }
-h1 {
-  margin-bottom: 0;
-}
-.headerBestPlayer {
-  padding: 0;
-}
+
 .gameBoard-container {
   align-self: stretch;
   height: 100%;

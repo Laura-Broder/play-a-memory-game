@@ -3,8 +3,13 @@ const playerName = document.querySelector(".playerName");
 const numOfErrors = document.querySelector(".numOfErrors");
 const bestPlayer = document.querySelector(".bestPlayer");
 const newGameBtn = document.querySelector(".startBtn");
+const restartGameBtn = document.querySelector(".restartBtn");
 
 newGameBtn.addEventListener("click", startGame);
+restartGameBtn.addEventListener("click", () => {
+  localStorage["continue"] === "no";
+  location.href = "./welcome.html";
+});
 
 let cardElementsArray = [];
 let cardObjArray = [];
@@ -26,7 +31,7 @@ const animalTheme = {
   // ],
 };
 startGame();
-
+function restartGame() {}
 function startGame() {
   cardElementsArray = [];
   cardObjArray = [];
@@ -36,7 +41,12 @@ function startGame() {
   cardElementsArray = createCardElementsArray(state.numOfCards);
   playerName.innerText = `Player's name: ${state.playerName}`;
   numOfErrors.innerText = `Number of Errors: ${state.numOfError}`;
-  bestPlayer.innerText = `Best Player: ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
+  if (localStorage["bestPlayerName"]) {
+    bestPlayer.innerText = `Best Player: ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
+  } else {
+    bestPlayer.innerText = `No wins on this level. 
+    Be the first!`;
+  }
 }
 
 function state() {
@@ -76,17 +86,14 @@ function getNumOfCards(gameLevel) {
     case "medium":
       numOfCards = 18;
       gameBoard.classList.add("medium");
-
       break;
     case "hard":
       numOfCards = 24;
       gameBoard.classList.add("hard");
-
       break;
     default:
       numOfCards = 12;
       gameBoard.classList.add("easy");
-
       break;
   }
   return numOfCards;
@@ -166,6 +173,7 @@ function flipCard(clickedCard) {
 function goodGuess(card1Index, card2Index) {
   emptyFlippedArray();
   if (document.querySelectorAll('[data-flipped="false"]').length === 0) {
+    localStorage["continue"] = "yes";
     winRestart();
   }
 }
@@ -173,7 +181,10 @@ function winRestart() {
   localStorage["lastPlayerNumOfErrors"] = state.numOfError;
   localStorage["lastPlayerName"] = state.playerName;
   localStorage["continue"] = "yes";
-  if (!localStorage["bestPlayerName"]) {
+  if (
+    Number(localStorage["bestPlayerNumOfErrors"]) < Number(state.numOfError) ||
+    !localStorage["bestPlayerName"]
+  ) {
     localStorage["bestPlayerName"] = state.playerName;
     localStorage["bestPlayerNumOfErrors"] = state.numOfError;
   }
