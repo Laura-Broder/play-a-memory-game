@@ -187,22 +187,22 @@ function deactivateFlippedCard(clickedCard) {
   clickedCard.setAttribute("data-active", false);
   clickedCard.removeEventListener("click", handleCardClick);
 }
-
+function checkFlippedArray(flippedCards) {
+  if (flippedCards.length === 2) {
+    const card1Index = Number(flippedCards[0].getAttribute("data-index"));
+    const card2Index = Number(flippedCards[1].getAttribute("data-index"));
+    checkMatch(card1Index, card2Index)
+      ? goodGuess(card1Index, card2Index)
+      : wrongGuess(card1Index, card2Index);
+  }
+}
 function handleCardClick(event) {
   const clickedCard = event.currentTarget;
   flipCard(clickedCard);
   // updateCardObj(index, prop, newValue);
   deactivateFlippedCard(clickedCard);
-  clickedCard.setAttribute("data-active", false);
-  clickedCard.removeEventListener("click", handleCardClick);
   state.flippedCards.push(clickedCard);
-  if (state.flippedCards.length === 2) {
-    const card1Index = Number(state.flippedCards[0].getAttribute("data-index"));
-    const card2Index = Number(state.flippedCards[1].getAttribute("data-index"));
-    checkMatch(card1Index, card2Index)
-      ? goodGuess(card1Index, card2Index)
-      : wrongGuess(card1Index, card2Index);
-  }
+  checkFlippedArray(state.flippedCards);
 }
 function flipCard(clickedCard) {
   clickedCard.setAttribute("data-flipped", true);
@@ -214,10 +214,12 @@ function goodGuess(card1Index, card2Index) {
     winRestart();
   }
 }
-function winRestart() {
+function storeWinnerDetails() {
   localStorage["lastPlayerNumOfErrors"] = state.numOfError;
   localStorage["lastPlayerName"] = state.playerName;
   localStorage["continue"] = "yes";
+}
+function checkIfBest() {
   if (
     Number(localStorage["bestPlayerNumOfErrors"]) > Number(state.numOfError) ||
     !localStorage["bestPlayerName"]
@@ -225,6 +227,10 @@ function winRestart() {
     localStorage["bestPlayerName"] = state.playerName;
     localStorage["bestPlayerNumOfErrors"] = state.numOfError;
   }
+}
+function winRestart() {
+  storeWinnerDetails();
+  checkIfBest();
   location.href = "./welcome.html";
 }
 function wrongGuess(card1Index, card2Index) {
@@ -260,6 +266,4 @@ function activateWrongMatch(card1Index, card2Index) {
   cardElementsArray[card1Index].setAttribute("data-active", true);
 
   cardElementsArray[card2Index].setAttribute("data-active", true);
-  // cardElementsArray[card1Index].style.transform = "none";
-  // cardElementsArray[card2Index].style.transform = "none";
 }

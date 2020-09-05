@@ -9,11 +9,11 @@ body {
 }
 .btn {
   font-size: 1.5vw;
-  padding: 10px 20px;
-  margin: 20px;
+  padding: 2vh 2.5vw;
+  margin: 1vw;
   border: none;
   box-shadow: 10px 5px 5px rgb(165, 158, 158);
-  border-radius: 10px;
+  border-radius: 7px;
   color: #f3f3f3;
   background-image: url(./animal-theme/back-cover.jpg);
   background-repeat: no-repeat;
@@ -22,7 +22,6 @@ body {
   background-size: cover;
 }
 .btn:active {
-  /* opacity: 0.8; */
   box-shadow: 5px 0 5px rgb(80, 75, 75);
   transform: translateY(4px);
   transform: translateX(4px);
@@ -39,14 +38,13 @@ header {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  /* padding-bottom: 20px; */
 }
 header > div {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 5px;
 }
 .mainHeader {
   background: #fff;
@@ -55,14 +53,14 @@ header > div {
   font-size: 3vw;
 }
 .playerDetails {
-  /* padding: 10px; */
+  padding: 5px 30px;
   background-color: rgb(207, 218, 214);
   border-radius: 5px;
   align-items: center;
   font-size: 1.5vw;
 }
 .bestPlayer {
-  text-align: left;
+  text-align: center;
 }
 
 .gameBoard-container {
@@ -74,7 +72,7 @@ header > div {
 .card {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 7px;
   box-shadow: 10px 5px 5px rgb(165, 158, 158);
   font-size: 40px;
   color: #f3f3f3;
@@ -167,34 +165,36 @@ header > div {
 }
 .welcomeMsgContainer {
   background-color: #f3f3f3;
-  border-radius: 10px;
+  border-radius: 7px;
   max-height: 30vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 10px 5px 5px rgb(19, 16, 16);
-  padding: 30px 30px;
+  padding: 30px;
   margin: 20px 0;
   line-height: 6vw;
 }
 .inputFields-container {
   background-color: #f3f3f3;
-  border-radius: 10px;
+  border-radius: 7px;
   min-height: 20vw;
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 10px 5px 5px rgb(19, 16, 16);
   padding: 15px 25px;
+  margin: 20px 0;
 }
 
 .inputFields-container > div {
-  padding: 30px;
+  padding: 3vh 3vw;
 }
 
 .welcome-container > .startBtn {
   font-size: 3vw;
-  padding: 30px 50px;
+  padding: 3vh 3vw;
   color: black;
   border: none;
   background: #f3f3f3;
