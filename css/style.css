@@ -5,7 +5,7 @@
 body {
   height: 100vh;
   padding: 2vw;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Kufam", cursive;
 }
 .btn {
   font-size: 1.5rem;
@@ -61,7 +61,7 @@ header > div {
   align-items: center;
 }
 .bestPlayer {
-  text-align: center;
+  text-align: left;
 }
 
 .gameBoard-container {
@@ -140,4 +140,66 @@ header > div {
 }
 [data-value="12"][data-flipped="true"] {
   background-image: url(./animal-theme/66-north-PqDR1-8jv1c-unsplash.jpg);
+}
+
+/* welcome page style */
+.welcome-container {
+  background-image: url(./animal-theme/back-cover.jpg);
+  background-repeat: no-repeat;
+  background-attachment: center;
+  background-position: center;
+  background-size: cover;
+  font-size: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.inputFields-container {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 10px 5px 5px rgb(19, 16, 16);
+  padding: 15px 25px;
+}
+
+.inputFields-container > div {
+  padding: 30px;
+}
+
+.welcome-container > .startBtn {
+  font-size: 40px;
+  padding: 30px 50px;
+  color: black;
+  border: none;
+  background: #f3f3f3;
+  box-shadow: 10px 5px 5px rgb(19, 16, 16);
+}
+.welcome-container > .startBtn:active {
+  /* opacity: 0.8; */
+  box-shadow: 5px 0 5px rgb(0, 0, 0);
+  transform: translateY(4px);
+  transform: translateX(4px);
+}
+.inputName-Field,
+.inputLevel-radio {
+  margin-top: 15px;
+  align-content: center;
+}
+.inputLevel-radio {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+}
+.inputLevel-radio > div > input {
+  vertical-align: middle;
+  transform: scale(1.5);
+  margin-right: 10px;
+}
+input#playerName {
+  padding: 5px 10px;
 }

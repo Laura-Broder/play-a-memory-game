@@ -4,13 +4,12 @@ const numOfErrors = document.querySelector(".numOfErrors");
 const bestPlayer = document.querySelector(".bestPlayer");
 const newGameBtn = document.querySelector(".startBtn");
 const restartGameBtn = document.querySelector(".restartBtn");
-
-newGameBtn.addEventListener("click", startGame);
-restartGameBtn.addEventListener("click", () => {
-  localStorage["continue"] === "no";
-  location.href = "./welcome.html";
-});
-
+const currentTimerValue = document.querySelector(".timer");
+let secCounter = 0;
+let sec = 0;
+let min = 0;
+let hr = 0;
+let secTimer;
 let cardElementsArray = [];
 let cardObjArray = [];
 const animalTheme = {
@@ -30,9 +29,46 @@ const animalTheme = {
   //   "url(./animal-theme/66-north-PqDR1-8jv1c-unsplash.jpg)",
   // ],
 };
+
+newGameBtn.addEventListener("click", startGame);
+
+restartGameBtn.addEventListener("click", () => {
+  resetTimer();
+  localStorage["continue"] === "no";
+  location.href = "./welcome.html";
+});
+// start the game as the page loads
 startGame();
-function restartGame() {}
+
+function startTimer() {
+  clearInterval(secTimer);
+  secTimer = setInterval(updateSec, 1000);
+}
+function updateSec() {
+  secCounter++;
+  let strSec;
+  let strMin;
+  sec = secCounter;
+  min = Math.floor(secCounter / 60);
+  hr = Math.floor(secCounter / 3600);
+  sec > 59 && (sec = secCounter % 60);
+  sec < 10 ? (strSec = `0${sec}`) : (strSec = `${sec}`);
+  min > 59 && (min = min % 60);
+  min < 10 ? (strMin = `0${min}`) : (strMin = `${min}`);
+
+  currentTimerValue.textContent = `${hr}:${strMin}:${strSec}`;
+}
+
+function resetTimer() {
+  secCounter = 0;
+  sec = 0;
+  min = 0;
+  hr = 0;
+  currentTimerValue.textContent = "0:00:00";
+}
+
 function startGame() {
+  resetTimer();
   cardElementsArray = [];
   cardObjArray = [];
   gameBoard.innerHTML = "";
@@ -42,11 +78,13 @@ function startGame() {
   playerName.innerText = `Player's name: ${state.playerName}`;
   numOfErrors.innerText = `Number of Errors: ${state.numOfError}`;
   if (localStorage["bestPlayerName"]) {
-    bestPlayer.innerText = `Best Player: ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
+    bestPlayer.innerText = `Best Player:
+     ${state.bestPlayer.bestPlayerName} with ${state.bestPlayer.bestPlayerNumOfErrors} Errors`;
   } else {
     bestPlayer.innerText = `No wins on this level. 
     Be the first!`;
   }
+  startTimer();
 }
 
 function state() {

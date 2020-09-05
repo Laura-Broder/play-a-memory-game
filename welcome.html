@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to my memory game!</title>
     <link rel="stylesheet" href="./css/my-normalize.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kufam:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
@@ -24,12 +28,18 @@
         <div class="inputLevel-container">
           <label for="gameLevel">Choose the level of the game:</label>
           <div class="inputLevel-radio">
-            <input type="radio" name="gameLevel" value="easy" checked />
-            <label for="level1">Easy</label>
-            <input type="radio" name="gameLevel" value="medium" />
-            <label for="level2">Medium</label>
-            <input type="radio" name="gameLevel" value="hard" />
-            <label for="level3">Hard</label>
+            <div>
+              <input type="radio" name="gameLevel" value="easy" checked />
+              <label for="level1">Easy</label>
+            </div>
+            <div>
+              <input type="radio" name="gameLevel" value="medium" />
+              <label for="level2">Medium</label>
+            </div>
+            <div>
+              <input type="radio" name="gameLevel" value="hard" />
+              <label for="level3">Hard</label>
+            </div>
           </div>
         </div>
       </div>
