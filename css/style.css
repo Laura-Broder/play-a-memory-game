@@ -4,7 +4,7 @@
 
 body {
   height: 100vh;
-  padding: 2vw;
+  padding: 2vh 2vw;
   font-family: "Kufam", cursive;
 }
 .btn {
@@ -29,7 +29,7 @@ body {
 .container {
   background: #f3f3f3;
   height: 100%;
-  padding: 2vw;
+  padding: 2vh 2vw;
   display: grid;
   grid-template-rows: max-content auto;
 }
@@ -53,7 +53,7 @@ header > div {
   font-size: 3vw;
 }
 .playerDetails {
-  padding: 5px 30px;
+  padding: 1vh 2vw;
   background-color: rgb(207, 218, 214);
   border-radius: 5px;
   align-items: center;
@@ -66,7 +66,7 @@ header > div {
 .gameBoard-container {
   align-self: stretch;
   height: 100%;
-  padding: 4vw;
+  padding: 4vh 4vw;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .card {
@@ -156,7 +156,7 @@ header > div {
   background-attachment: center;
   background-position: center;
   background-size: cover;
-  font-size: 2vw;
+  font-size: 3vw;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -164,6 +164,8 @@ header > div {
   justify-content: center;
 }
 .welcomeMsgContainer {
+  font-size: 2.5vw;
+
   background-color: #f3f3f3;
   border-radius: 7px;
   max-height: 30vw;
