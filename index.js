@@ -1,3 +1,4 @@
+// select elements
 const gameBoard = document.querySelector(".gameBoard");
 const playerName = document.querySelector(".playerName");
 const numOfErrors = document.querySelector(".numOfErrors");
@@ -5,13 +6,19 @@ const bestPlayer = document.querySelector(".bestPlayer");
 const newGameBtn = document.querySelector(".startBtn");
 const restartGameBtn = document.querySelector(".restartBtn");
 const currentTimerValue = document.querySelector(".timer");
+// ---------------------------------------------
+// create global variables for the timer
 let secCounter = 0;
 let sec = 0;
 let min = 0;
 let hr = 0;
 let secTimer;
+// ---------------------------------------------
+// declare global arrays for the cards arrays
 let cardElementsArray = [];
 let cardObjArray = [];
+// ---------------------------------------------
+// defining themes
 const animalTheme = {
   themeName: "animal",
   // themeImgArray: [
@@ -29,17 +36,23 @@ const animalTheme = {
   //   "url(./animal-theme/66-north-PqDR1-8jv1c-unsplash.jpg)",
   // ],
 };
-
+// ---------------------------------------------
+// add event listener to the start game button
 newGameBtn.addEventListener("click", startGame);
-
+// add event listener to the restart game button
 restartGameBtn.addEventListener("click", () => {
   resetTimer();
   localStorage["continue"] === "no";
   location.href = "./welcome.html";
 });
 
+// ---------------------------------------------
 // start the game as the page loads
 startGame();
+// ---------------------------------------------
+
+// ---------------------------------------------
+// timer functions
 
 function startTimer() {
   clearInterval(secTimer);
@@ -59,6 +72,7 @@ function updateSec() {
 
   currentTimerValue.textContent = `${hr}:${strMin}:${strSec}`;
 }
+// reset when the game restarts
 function resetTimer() {
   secCounter = 0;
   sec = 0;
@@ -72,6 +86,16 @@ function resetBoard() {
   cardObjArray = [];
   gameBoard.innerHTML = "";
 }
+// ---------------------------------------------
+// start game functions
+function startGame() {
+  resetBoard();
+  state();
+  cardObjArray = createCardObjArray(state.numOfCards);
+  cardElementsArray = createCardElementsArray(state.numOfCards);
+  displayPlayerDetails();
+  startTimer();
+}
 function displayPlayerDetails() {
   playerName.innerText = `Player: ${state.playerName}`;
   numOfErrors.innerText = `#Errors: ${state.numOfError}`;
@@ -84,14 +108,7 @@ function displayPlayerDetails() {
     Be the first!`;
   }
 }
-function startGame() {
-  resetBoard();
-  state();
-  cardObjArray = createCardObjArray(state.numOfCards);
-  cardElementsArray = createCardElementsArray(state.numOfCards);
-  displayPlayerDetails();
-  startTimer();
-}
+// define the state of the game object
 function state() {
   state.playerName = localStorage["playerName"];
   state.gameLevel = localStorage["chosenLevel"];
@@ -105,7 +122,7 @@ function state() {
     bestPlayerNumOfErrors: localStorage["bestPlayerNumOfErrors"],
   };
 }
-
+// calculate the number of cards to display from the level selected
 function getNumOfCards(gameLevel) {
   let numOfCards;
   switch (gameLevel) {
@@ -128,7 +145,6 @@ function getNumOfCards(gameLevel) {
   }
   return numOfCards;
 }
-
 // randomize the array values to randomize the cards.
 function randomizeCardsArray(arraySize) {
   let cardsArray = [];
@@ -178,10 +194,18 @@ function createCardElementsArray(numOfCards) {
   }
   return cardElementsArray;
 }
-// functions on the card:
-// update card object:
-function updateCardObj(index, prop, newValue) {
-  cardObjArray[index][prop] = newValue;
+// ---------------------------------------------
+// functions of the game:
+function handleCardClick(event) {
+  const clickedCard = event.currentTarget;
+  flipCard(clickedCard);
+  // updateCardObj(index, prop, newValue);
+  deactivateFlippedCard(clickedCard);
+  state.flippedCards.push(clickedCard);
+  checkFlippedArray(state.flippedCards);
+}
+function flipCard(clickedCard) {
+  clickedCard.setAttribute("data-flipped", true);
 }
 function deactivateFlippedCard(clickedCard) {
   clickedCard.setAttribute("data-active", false);
@@ -196,23 +220,30 @@ function checkFlippedArray(flippedCards) {
       : wrongGuess(card1Index, card2Index);
   }
 }
-function handleCardClick(event) {
-  const clickedCard = event.currentTarget;
-  flipCard(clickedCard);
-  // updateCardObj(index, prop, newValue);
-  deactivateFlippedCard(clickedCard);
-  state.flippedCards.push(clickedCard);
-  checkFlippedArray(state.flippedCards);
+function checkMatch(card1Index, card2Index) {
+  return (
+    state.cardsValuesArray[card1Index] === state.cardsValuesArray[card2Index]
+  );
 }
-function flipCard(clickedCard) {
-  clickedCard.setAttribute("data-flipped", true);
+function emptyFlippedArray() {
+  state.flippedCards = [];
 }
+// update card object function (not used):
+function updateCardObj(index, prop, newValue) {
+  cardObjArray[index][prop] = newValue;
+}
+// good guess
 function goodGuess(card1Index, card2Index) {
   emptyFlippedArray();
   if (document.querySelectorAll('[data-flipped="false"]').length === 0) {
     localStorage["continue"] = "yes";
     winRestart();
   }
+}
+function winRestart() {
+  storeWinnerDetails();
+  checkIfBest();
+  location.href = "./welcome.html";
 }
 function storeWinnerDetails() {
   localStorage["lastPlayerNumOfErrors"] = state.numOfError;
@@ -228,11 +259,7 @@ function checkIfBest() {
     localStorage["bestPlayerNumOfErrors"] = state.numOfError;
   }
 }
-function winRestart() {
-  storeWinnerDetails();
-  checkIfBest();
-  location.href = "./welcome.html";
-}
+// wrong guess
 function wrongGuess(card1Index, card2Index) {
   state.numOfError++;
   numOfErrors.innerHTML = `Number of Errors: ${state.numOfError}`;
@@ -253,14 +280,6 @@ function activateCards() {
 }
 function flipBack(cardElement) {
   cardElement.setAttribute("data-flipped", false);
-}
-function emptyFlippedArray() {
-  state.flippedCards = [];
-}
-function checkMatch(card1Index, card2Index) {
-  return (
-    state.cardsValuesArray[card1Index] === state.cardsValuesArray[card2Index]
-  );
 }
 function activateWrongMatch(card1Index, card2Index) {
   cardElementsArray[card1Index].setAttribute("data-active", true);
