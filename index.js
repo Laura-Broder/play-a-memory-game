@@ -166,7 +166,7 @@ function createCardElementsArray(numOfCards) {
   let cardElementsArray = [];
   for (let i = 0; i < numOfCards; i++) {
     const card = document.createElement("div");
-    card.innerText = cardObjArray[i].cardValue;
+    // card.innerText = cardObjArray[i].cardValue;
     card.classList.add("card");
     card.setAttribute("data-index", i);
     card.setAttribute("data-value", cardObjArray[i].cardValue);
