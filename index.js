@@ -183,7 +183,6 @@ function createCardElementsArray(numOfCards) {
   let cardElementsArray = [];
   for (let i = 0; i < numOfCards; i++) {
     const card = document.createElement("div");
-    // card.innerText = cardObjArray[i].cardValue;
     card.classList.add("card");
     card.setAttribute("data-index", i);
     card.setAttribute("data-value", cardObjArray[i].cardValue);
@@ -192,9 +191,9 @@ function createCardElementsArray(numOfCards) {
     card.addEventListener("click", handleCardClick);
     gameBoard.appendChild(card);
     cardElementsArray.push(card);
-    const innerCard = document.createElement("span");
-    innerCard.innerText = `${cardObjArray[i].cardValue}`;
-    card.appendChild(innerCard);
+    // const innerCard = document.createElement("span");
+    // innerCard.innerText = `${cardObjArray[i].cardValue}`;
+    // card.appendChild(innerCard);
   }
   return cardElementsArray;
 }
