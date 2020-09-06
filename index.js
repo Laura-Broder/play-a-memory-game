@@ -240,7 +240,7 @@ function wrongGuess(card1Index, card2Index) {
     cardElement.removeEventListener("click", handleCardClick),
   );
   activateWrongMatch(card1Index, card2Index);
-  setTimeout(activateCards, 1000);
+  setTimeout(activateCards, 2000);
 }
 function activateCards() {
   cardElementsArray.forEach((cardElement) => {
