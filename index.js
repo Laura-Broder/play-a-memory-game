@@ -117,6 +117,7 @@ function state() {
   state.theme = animalTheme;
   state.numOfError = 0;
   state.flippedCards = [];
+  state.activeBoard = true;
   state.bestPlayer = {
     bestPlayerName: localStorage["bestPlayerName"],
     bestPlayerNumOfErrors: localStorage["bestPlayerNumOfErrors"],
@@ -191,6 +192,9 @@ function createCardElementsArray(numOfCards) {
     card.addEventListener("click", handleCardClick);
     gameBoard.appendChild(card);
     cardElementsArray.push(card);
+    const innerCard = document.createElement("span");
+    innerCard.innerText = `${cardObjArray[i].cardValue}`;
+    card.appendChild(innerCard);
   }
   return cardElementsArray;
 }
@@ -198,18 +202,22 @@ function createCardElementsArray(numOfCards) {
 // functions of the game:
 function handleCardClick(event) {
   const clickedCard = event.currentTarget;
-  flipCard(clickedCard);
-  // updateCardObj(index, prop, newValue);
-  deactivateFlippedCard(clickedCard);
-  state.flippedCards.push(clickedCard);
-  checkFlippedArray(state.flippedCards);
+  if (
+    clickedCard.getAttribute("data-active") === "true" &&
+    state.activeBoard === true
+  ) {
+    flipCard(clickedCard);
+    // updateCardObj(index, prop, newValue);
+    deactivateFlippedCard(clickedCard);
+    state.flippedCards.push(clickedCard);
+    checkFlippedArray(state.flippedCards);
+  }
 }
 function flipCard(clickedCard) {
   clickedCard.setAttribute("data-flipped", true);
 }
 function deactivateFlippedCard(clickedCard) {
   clickedCard.setAttribute("data-active", false);
-  clickedCard.removeEventListener("click", handleCardClick);
 }
 function checkFlippedArray(flippedCards) {
   if (flippedCards.length === 2) {
@@ -263,26 +271,20 @@ function checkIfBest() {
 function wrongGuess(card1Index, card2Index) {
   state.numOfError++;
   numOfErrors.innerHTML = `Number of Errors: ${state.numOfError}`;
-  cardElementsArray.forEach((cardElement) =>
-    cardElement.removeEventListener("click", handleCardClick),
-  );
+  state.activeBoard = false;
+  setTimeout(activateCards, 2000, card1Index, card2Index);
+}
+function activateCards(card1Index, card2Index) {
+  state.activeBoard = true;
   activateWrongMatch(card1Index, card2Index);
-  setTimeout(activateCards, 2000);
-}
-function activateCards() {
-  cardElementsArray.forEach((cardElement) => {
-    if (cardElement.getAttribute("data-active") === "true") {
-      cardElement.addEventListener("click", handleCardClick);
-      flipBack(cardElement);
-    }
-  });
+  flipBack(card1Index);
+  flipBack(card2Index);
   emptyFlippedArray();
-}
-function flipBack(cardElement) {
-  cardElement.setAttribute("data-flipped", false);
 }
 function activateWrongMatch(card1Index, card2Index) {
   cardElementsArray[card1Index].setAttribute("data-active", true);
-
   cardElementsArray[card2Index].setAttribute("data-active", true);
+}
+function flipBack(cardIndex) {
+  cardElementsArray[cardIndex].setAttribute("data-flipped", false);
 }
